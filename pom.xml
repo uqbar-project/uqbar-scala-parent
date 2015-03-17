@@ -5,6 +5,13 @@
 	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<properties>
+		<encoding>UTF-8</encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<scm.gitServer>scm:git:https://github.com/uqbar-project</scm.gitServer>
+		<scm.gitRepository>uqbar-parent-project</scm.gitRepository>
+	</properties>
+
 	<parent>
 		<groupId>org.uqbar-project</groupId>
 		<artifactId>uqbar-parent-project</artifactId>
