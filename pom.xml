@@ -1,0 +1,145 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>uqbar-scala-parent</name>
+	<artifactId>uqbar-scala-parent</artifactId>
+	<version>1.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.uqbar-project</groupId>
+		<artifactId>uqbar-parent-project</artifactId>
+		<version>1.8-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<scala.version>2.11.2</scala.version>
+	</properties>
+
+	<scm>
+		<connection>scm:git:${scm.gitServer}/${project.artifactId}</connection>
+		<developerConnection>scm:git:${scm.gitServer}/${project.artifactId}</developerConnection>
+		<url>scm:git:${scm.gitServer}/${project.artifactId}</url>
+  	</scm>
+
+	<dependencies>
+		<!-- SCALA -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-actors</artifactId>
+			<version>${scala.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang.modules</groupId>
+    		<artifactId>scala-xml_2.11</artifactId>
+    		<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scalatest</groupId>
+			<artifactId>scalatest_2.11</artifactId>
+			<version>2.1.7</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- /SCALA -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<!-- <groupId>org.scala-tools</groupId> <artifactId>maven-scala-plugin</artifactId> -->
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<version>3.1.5</version>
+				<executions>
+					<execution>
+						<id>scala-compile-first</id>
+						<!-- This is not a process resources goal, but a compile goal. Putting 
+							this goal in this phase ensures that the Scala compiler executes before Java 
+							compiler. The Scala compiler compiles both Java and Scala classes. Therefore, 
+							the Java compiler is not really needed. -->
+						<phase>process-resources</phase>
+						<configuration>
+							<scalaVersion>${scala.version}</scalaVersion>
+						</configuration>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>scala-test-compile-first</id>
+						<phase>process-test-resources</phase>
+						<configuration>
+							<scalaVersion>${scala.version}</scalaVersion>
+						</configuration>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<useFile>false</useFile>
+					<includes>
+						<include>**/*Test.*</include>
+						<include>**/*Suite.*</include>
+					</includes>
+				</configuration>
+			</plugin>
+
+			<!-- TODO: IS THIS NEEDED ? IS IT GENERIC ENOUGH FOR ALL SCALA PROJECTS ?? -->
+			<!-- mvn assembly:assembly -DdescriptorId=jar-with-dependencies -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-5</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+	
+</project>
