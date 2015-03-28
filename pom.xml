@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>uqbar-scala-parent</name>
 	<artifactId>uqbar-scala-parent</artifactId>
-	<version>1.3</version>
+	<version>1.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -19,7 +19,7 @@
 		<connection>scm:git:${scm.gitServer}/${project.artifactId}</connection>
 		<developerConnection>scm:git:${scm.gitServer}/${project.artifactId}</developerConnection>
 		<url>scm:git:${scm.gitServer}/${project.artifactId}</url>
-  	  <tag>v1.3</tag>
+  	  <tag>HEAD</tag>
   </scm>
 
 	<dependencies>
