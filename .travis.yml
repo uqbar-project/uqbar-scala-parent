@@ -1,6 +1,7 @@
 language: java
 after_success:
-- mvn deploy
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && mvn deploy
+- '[[ $TRAVIS_TAG == v[0-9.]* ]] && { mvn clean deploy -Prelease };'
 before_install:
 - openssl aes-256-cbc -K $encrypted_cd3b9f5efab6_key -iv $encrypted_cd3b9f5efab6_iv
   -in maven_files.tar.enc -out maven_files.tar -d
