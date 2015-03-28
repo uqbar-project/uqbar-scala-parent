@@ -1,1 +1,4 @@
-[![Build Status](https://travis-ci.org/faloi/uqbar-scala-parent-mirror.svg)](https://travis-ci.org/faloi/uqbar-scala-parent-mirror)
+[![Build Status](https://travis-ci.org/uqbar-project/uqbar-scala-parent.svg?branch=master)](https://travis-ci.org/uqbar-project/uqbar-scala-parent)
+
+uqbar-scala-parent
+==================
